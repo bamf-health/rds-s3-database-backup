@@ -47,7 +47,7 @@ if [[ -z "${S3_BUCKET}" ]]; then
   exit 1
 fi
 
-DATE=$(date -I)
+DATE=$(date "+%Y-%m-%d-%H%M")
 TARGET=s3://${S3_BUCKET}/${IDENTIFIER}-${DATE}.sql.gz
 
 echo Backing up ${DATABASE_HOST}/${DATABASE_NAME} to ${TARGET}
