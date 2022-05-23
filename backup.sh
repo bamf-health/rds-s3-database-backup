@@ -57,6 +57,10 @@ pg_dump --clean -Z 9 -v -h ${DATABASE_HOST} -U ${DATABASE_USER} -d ${DATABASE_NA
 rc=$?
 export PGPASSWORD=
 
+if [[ $rc == 0 && -n "$NOTIFY_URL" ]]; then
+    curl "$NOTIFY_URL"
+fi
+
 if [[ $rc != 0 ]]; then exit $rc; fi
 
 echo Done
