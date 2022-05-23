@@ -53,7 +53,7 @@ TARGET=s3://${S3_BUCKET}/${IDENTIFIER}-${DATE}.sql.gz
 echo Backing up ${DATABASE_HOST}/${DATABASE_NAME} to ${TARGET}
 
 export PGPASSWORD=${DATABASE_PASSWORD}
-pg_dump -Z 9 -v -h ${DATABASE_HOST} -U ${DATABASE_USER} -d ${DATABASE_NAME} | aws s3 cp --storage-class STANDARD_IA --sse aws:kms - ${TARGET}
+pg_dump --clean -Z 9 -v -h ${DATABASE_HOST} -U ${DATABASE_USER} -d ${DATABASE_NAME} | aws s3 cp --storage-class STANDARD_IA --sse aws:kms - ${TARGET}
 rc=$?
 export PGPASSWORD=
 
